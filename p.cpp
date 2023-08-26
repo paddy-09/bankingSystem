@@ -60,6 +60,9 @@ ofstream & operator<<(ofstream &ofs,Account &acc)
  ofs<<acc.balance<<endl;
  return ofs;
 }
+ 
+//  reading data from infile and putting it in accounts
+//  This reads data from the file into the account instance.
 ifstream & operator>>(ifstream &ifs,Account &acc)
 {
  ifs>>acc.accountNumber;
@@ -69,6 +72,8 @@ ifstream & operator>>(ifstream &ifs,Account &acc)
  return ifs;
 
 }
+
+
 ostream & operator<<(ostream &os,Account &acc)
 {
  os<<"First Name:"<<acc.getFirstName()<<endl;
@@ -85,8 +90,8 @@ private:
 public:
  Bank()
  {
-      Account account;
- ifstream infile;
+ Account account;
+ ifstream infile; //will be used to read data from the file.
  infile.open("Bank.data");
  if(!infile)
  {
@@ -101,9 +106,11 @@ public:
 
  infile.close();
  }
+
+
  Account OpenAccount(string fname,string lname,float balance)
  {
-      ofstream outfile;
+      ofstream outfile; // will be used to write data to the file
  Account account(fname,lname,balance);
  accounts.insert(pair<long,Account>(account.getAccNo(),account));
 
@@ -173,6 +180,7 @@ int main()
  long accountNumber;
  float balance;
  float amount;
+
  cout<<"**Banking System**"<<endl;
  do
  {
